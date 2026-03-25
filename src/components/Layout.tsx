@@ -1,5 +1,6 @@
 import Nav from './Nav'
 import HeroSection from './HeroSection'
+import HighlightsSection from './HighlightsSection'
 
 export default function Layout() {
   return (
@@ -7,7 +8,7 @@ export default function Layout() {
       <Nav />
       <main>
         <HeroSection />
-        <section id="highlights" className="p-8">Highlights placeholder</section>
+        <HighlightsSection />
         <section id="cast" className="p-8">Cast placeholder</section>
         <section id="songs" className="p-8">Songs placeholder</section>
       </main>
