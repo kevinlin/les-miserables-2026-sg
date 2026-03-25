@@ -1,7 +1,9 @@
+import Nav from './Nav'
+
 export default function Layout() {
   return (
     <div className="min-h-screen bg-bg">
-      <header className="p-4 text-accent font-display">Nav placeholder</header>
+      <Nav />
       <main>
         <section id="hero" className="p-8">Hero placeholder</section>
         <section id="highlights" className="p-8">Highlights placeholder</section>
