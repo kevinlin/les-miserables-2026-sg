@@ -99,7 +99,7 @@ export default function CastDetailPanel({ member, onClose }: Props) {
                 {/* Photo */}
                 <div className="aspect-[3/4] rounded-lg bg-bg overflow-hidden">
                   <img
-                    src={member.photoUrl}
+                    src={`${import.meta.env.BASE_URL}${member.photoUrl.replace(/^\//, '')}`}
                     alt={member.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {

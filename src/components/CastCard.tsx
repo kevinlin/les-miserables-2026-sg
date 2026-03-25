@@ -9,6 +9,7 @@ type Props = {
 
 export default function CastCard({ member, variant, onClick }: Props) {
   const { t } = useLanguage()
+  const photoSrc = `${import.meta.env.BASE_URL}${member.photoUrl.replace(/^\//, '')}`
 
   if (variant === 'featured') {
     return (
@@ -18,7 +19,7 @@ export default function CastCard({ member, variant, onClick }: Props) {
       >
         <div className="aspect-[3/4] bg-surface overflow-hidden">
           <img
-            src={member.photoUrl}
+            src={photoSrc}
             alt={member.name}
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -60,7 +61,7 @@ export default function CastCard({ member, variant, onClick }: Props) {
     >
       <div className="aspect-square bg-surface overflow-hidden">
         <img
-          src={member.photoUrl}
+          src={photoSrc}
           alt={member.name}
           className="w-full h-full object-cover"
           onError={(e) => {

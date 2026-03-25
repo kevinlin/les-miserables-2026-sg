@@ -14,7 +14,7 @@ export const castMembers: CastMember[] = [
       zh: '史上唯一在不同《悲惨世界》制作中分别饰演爱潘妮、芳汀和德纳第夫人三位女主角的演员——历史性的"三冠王"。',
     },
     songs: ['master-of-the-house', 'one-day-more'],
-    photoUrl: '/images/cast/lea-salonga.jpg',
+    photoUrl: '/images/cast/lea-salonga.webp',
     tags: ['featured', 'celebrity'],
     awards: ['Tony Award', 'Olivier Award'],
   },
@@ -31,7 +31,7 @@ export const castMembers: CastMember[] = [
       zh: '首位在伦敦西区饰演爱潘妮的新加坡人，如今首次在家乡演出这一角色——真正的衣锦还乡。',
     },
     songs: ['on-my-own', 'a-little-fall-of-rain', 'one-day-more'],
-    photoUrl: '/images/cast/nathania-ong.jpg',
+    photoUrl: '/images/cast/nathania-ong.webp',
     tags: ['featured', 'local'],
   },
   {
