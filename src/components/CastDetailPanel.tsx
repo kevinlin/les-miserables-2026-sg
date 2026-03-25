@@ -64,7 +64,7 @@ export default function CastDetailPanel({ member, onClose }: Props) {
               role="dialog"
               aria-modal="true"
               aria-label={`${member.name} details`}
-              className={`fixed z-50 bg-surface overflow-y-auto ${
+              className={`fixed z-50 bg-surface flex flex-col ${
                 useDesktop
                   ? 'top-0 right-0 h-full w-[400px] rounded-none'
                   : 'bottom-0 left-0 right-0 h-[90vh] rounded-t-2xl'
@@ -77,11 +77,15 @@ export default function CastDetailPanel({ member, onClose }: Props) {
               dragControls={dragControls}
               dragConstraints={{ top: 0 }}
               dragElastic={0.2}
+              dragListener={false}
               onDragEnd={handleDragEnd}
             >
-              {/* Drag handle (mobile) */}
+              {/* Drag handle (mobile) — only this area initiates swipe-to-dismiss */}
               {!useDesktop && (
-                <div className="flex justify-center pt-3 pb-1">
+                <div
+                  className="flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing touch-none"
+                  onPointerDown={(e) => dragControls.start(e)}
+                >
                   <div className="w-10 h-1 rounded-full bg-muted/40" />
                 </div>
               )}
@@ -95,7 +99,7 @@ export default function CastDetailPanel({ member, onClose }: Props) {
                 ✕
               </button>
 
-              <div className="p-6 space-y-5">
+              <div className="p-6 space-y-5 overflow-y-auto flex-1 min-h-0">
                 {/* Photo */}
                 <div className="aspect-[3/4] rounded-lg bg-bg overflow-hidden">
                   <img
