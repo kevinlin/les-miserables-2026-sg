@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.marinabaysands.com)",
+      "WebSearch",
+      "WebFetch(domain:www.broadwayworld.com)",
+      "WebFetch(domain:www.thestar.com.my)",
+      "WebFetch(domain:www.timeout.com)",
+      "WebFetch(domain:thesmartlocal.com)",
+      "WebFetch(domain:www.sistic.com.sg)",
+      "WebFetch(domain:pullupstand.com)",
+      "WebFetch(domain:www.cameronmackintosh.com)",
+      "WebFetch(domain:bakchormeeboy.com)",
+      "WebFetch(domain:www.factmagazines.com)",
+      "WebFetch(domain:www.londontheatre.co.uk)",
+      "WebFetch(domain:theatreweekly.com)",
+      "WebFetch(domain:www.playbill.com)",
+      "WebFetch(domain:baseasia.com)",
+      "WebFetch(domain:www.klook.com)",
+      "WebFetch(domain:www.gmanetwork.com)",
+      "WebFetch(domain:musicaldigest.com)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:www.westendtheatre.com)",
+      "WebFetch(domain:artthreat.net)",
+      "WebFetch(domain:seatplan.com)",
+      "WebFetch(domain:www.singaporenewstoday.com)",
+      "WebFetch(domain:www.bandwagon.asia)",
+      "Bash(bash scripts/start-server.sh --project-dir /Users/kevinlin/dev/github-kevinlin/les-miserables-2026-sg)"
+    ]
+  }
+}
