@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import LanguageToggle from './LanguageToggle'
 import ThemeToggle from './ThemeToggle'
 import MobileMenu from './MobileMenu'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { t } = useLanguage()
 
   return (
     <nav className="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-surface-border">
@@ -16,13 +18,13 @@ export default function Nav() {
         {/* Desktop nav links + controls */}
         <div className="hidden lg:flex items-center gap-6">
           <a href="#highlights" className="text-sm text-muted hover:text-foreground transition-colors">
-            Highlights
+            {t({ en: 'Highlights', zh: '亮点' })}
           </a>
           <a href="#cast" className="text-sm text-muted hover:text-foreground transition-colors">
-            Cast
+            {t({ en: 'Cast', zh: '演员' })}
           </a>
           <a href="#songs" className="text-sm text-muted hover:text-foreground transition-colors">
-            Songs
+            {t({ en: 'Songs', zh: '曲目' })}
           </a>
           <div className="flex items-center gap-2">
             <LanguageToggle />
