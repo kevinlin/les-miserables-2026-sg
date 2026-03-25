@@ -1,7 +1,13 @@
+import { ThemeProvider } from './contexts/ThemeContext'
+import { LanguageProvider } from './contexts/LanguageContext'
+import Layout from './components/Layout'
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-bg text-foreground">
-      <p className="p-8 text-accent font-display text-2xl">Les Misérables — scaffold working</p>
-    </div>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Layout />
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
