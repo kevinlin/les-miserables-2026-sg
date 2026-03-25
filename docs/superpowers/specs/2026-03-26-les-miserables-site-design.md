@@ -85,9 +85,12 @@ The site highlights what makes this specific Singapore production special — th
 - Bilingual body: uses the same font stack; Chinese characters render correctly on all platforms
 
 **Motion**
-- Cast detail panel: slides up from bottom on mobile (`y: '100%' → 0`), slides in from right on desktop (`x: '100%' → 0`)
+- Cast detail panel: slides up from bottom at `< 1024px` (`y: '100%' → 0`), slides in from right at `>= 1024px` (`x: '100%' → 0`). The 1024px breakpoint is the single threshold for both layout and animation variant — no intermediate tablet-specific animation.
 - Cast card hover: subtle lift (`translateY(-2px)`) + border glow (`box-shadow: 0 0 12px #7ab8d433`)
 - All transitions: 300ms ease
+
+**Panel scrim (backdrop)**
+- A `rgba(0,0,0,0.5)` overlay covers the page content behind the open panel in both dark and light modes. Applied as a `fixed inset-0` div rendered by `CastDetailPanel` via `AnimatePresence` (opacity 0→0.5 on open, 0.5→0 on close). Tapping the scrim closes the panel.
 
 ---
 
@@ -99,12 +102,12 @@ Single HTML page (`/`). No client-side router. The cast detail panel opens/close
 
 | # | Section | Notes |
 |---|---|---|
-| 1 | **Nav** (sticky) | Logo · EN/中 toggle · ☀/🌙 toggle · hamburger (mobile) |
-| 2 | **HeroSection** | Show title (serif, large) · subtitle · dates · "Get Tickets" CTA linking to MBS |
+| 1 | **Nav** (sticky) | Logo · EN/中 toggle · ☀/🌙 toggle · hamburger at `< 1024px` |
+| 2 | **HeroSection** | Show title (serif, large) · subtitle · dates · "Get Tickets" CTA → `https://www.marinabaysands.com/entertainment/shows/les-miserables.html` |
 | 3 | **HighlightsSection** | 3 callout cards: Triple Crown · Homecoming · Arena format |
-| 4 | **CastSection** | 2-col featured row (Lea, Nathania) + 3-col grid (remaining 7 cast) |
+| 4 | **CastSection** | 2-col featured row (Lea, Nathania) + 3-col grid (remaining 7 cast, left-aligned — orphaned last row shows 1 card left-aligned, no special treatment) |
 | — | **CastDetailPanel** | Slides in on cast card tap — see §8 |
-| 5 | **SongsSection** | Scrollable list of ~10 iconic songs |
+| 5 | **SongsSection** | Normal page scroll (no inner overflow container). Section header: "Key Songs / 经典曲目". Each `SongRow` shows: song title (left, prominent) · character name (center, muted) · act badge (right, e.g. "Act 1"). |
 | 6 | **Footer** | Disclaimer · links · show info |
 
 ---
@@ -220,6 +223,14 @@ App
 
 ### Key component contracts
 
+**`CastTags`**
+
+Renders inside `CastDetailPanel`. Displays two kinds of tags:
+1. **Category tags** from `member.tags`: `featured` → "★ FEATURED", `local` → "🇸🇬 LOCAL", `celebrity` → "Celebrity"
+2. **Award chips** from `member.awards?: string[]`: each award rendered as a small outlined badge chip (e.g. "Tony Award", "Olivier Award"). If `awards` is undefined or empty, no award chips are rendered.
+
+Both tag types appear in a wrapping flex row below the cast member's role subtitle in the detail panel.
+
 **`CastCard`**
 ```ts
 props: {
@@ -228,7 +239,7 @@ props: {
   onClick: (member: CastMember) => void
 }
 ```
-Featured: larger photo, name, role, tag badge. Standard: compact, name + role only. Both: hover lift + border glow.
+Featured: photo (aspect ratio 3:4, `object-fit: cover`), name, role, tag badge. Height is determined by content — grid uses `align-items: start` so cards don't stretch to match each other. `whySpecial` is NOT shown on the card; it only appears in the detail panel. Standard: compact square photo (1:1), name + role only. Both: hover lift + border glow; no hover text reveal.
 
 **`CastDetailPanel`**
 ```ts
@@ -237,7 +248,15 @@ props: {
   onClose: () => void
 }
 ```
-Mobile: bottom sheet, 90vh, swipe or ✕ to dismiss. Desktop: right sidebar, ~400px fixed. `AnimatePresence` handles mount/unmount animation. Focus-trapped when open, Escape key closes.
+At `< 1024px`: bottom sheet, `90vh`, draggable. Swipe dismiss threshold: drag down > 120px or release velocity > 500px/s triggers close; otherwise snaps back. At `>= 1024px`: right sidebar, `400px` fixed width, full viewport height. `AnimatePresence` handles mount/unmount. Backdrop scrim (see §5) covers the rest of the page. Focus-trapped when open; Escape key or scrim tap closes; focus returns to the triggering card on close.
+
+**`MobileMenu`**
+- Visible at `< 1024px` as a hamburger button in the Nav
+- Opens a full-width dropdown panel below the Nav (not a drawer — pushes content down)
+- Contains anchor links: `#highlights` · `#cast` · `#songs`
+- Repeats `LanguageToggle` and `ThemeToggle` controls for reachability
+- Closes on: link tap, outside tap, or second hamburger tap
+- At `>= 1024px`: hamburger is hidden; `LanguageToggle` and `ThemeToggle` are always visible inline in the Nav
 
 **`LanguageContext`**
 ```ts
@@ -247,7 +266,7 @@ type LanguageContextValue = {
   t: (b: Bilingual) => string     // returns b[lang]
 }
 ```
-All component text goes through `t()`. Toggle is instant — no async, no loading state.
+`lang: 'zh'` maps to Simplified Chinese (zh-Hans). The `<html lang>` attribute is set to `zh-Hans` when Chinese is active. All component text goes through `t()`. Toggle is instant — no async, no loading state.
 
 **`ThemeContext`**
 ```ts
@@ -280,9 +299,11 @@ Content is authored as co-located bilingual objects in data files, not as separa
 
 | Breakpoint | Layout changes |
 |---|---|
-| `< 640px` (mobile) | Single column; hamburger nav; cast detail panel slides up from bottom |
-| `640–1024px` (tablet) | 2-col cast grid; detail panel still bottom sheet |
-| `> 1024px` (desktop) | 3-col cast grid; detail panel slides in from right as sidebar |
+| `< 640px` (mobile) | Single column cast grid; hamburger nav |
+| `640px–1023px` (tablet) | 2-col cast grid; hamburger nav still shown; detail panel bottom sheet (same as mobile) |
+| `>= 1024px` (desktop) | 3-col cast grid; inline Nav controls (no hamburger); detail panel slides in from right as 400px sidebar |
+
+The **panel animation threshold is 1024px** (not 640px). Below 1024px: bottom sheet. At 1024px and above: right sidebar.
 
 ---
 
@@ -292,7 +313,7 @@ Content is authored as co-located bilingual objects in data files, not as separa
 - `CastDetailPanel` traps focus when open; returns focus to triggering card on close
 - Escape key closes the panel
 - All images have descriptive `alt` text
-- Language toggle updates `<html lang>` attribute (`en` or `zh`)
+- Language toggle updates `<html lang>` attribute: `en` for English, `zh-Hans` for Simplified Chinese
 - Colour contrast meets WCAG AA in both dark and light modes
 - `prefers-reduced-motion`: Framer Motion respects this — animations disabled if set
 
