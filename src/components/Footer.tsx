@@ -17,8 +17,8 @@ export default function Footer() {
         </p>
         <p className="text-xs text-muted">
           {t({
-            en: 'Running time: ~3h 5min including 20-min interval · Rating: G (ages 8+ recommended)',
-            zh: '演出时长：约3小时5分钟（含20分钟中场休息）· 分级：G（建议8岁以上观众）',
+            en: 'Approx. 185 mins (incl. 20-min intermission) · Language: English · Rating: G (ages 8+ recommended)',
+            zh: '演出时长：约185分钟（含20分钟中场休息）· 演出语言：英语 · 分级：G（建议8岁以上）',
           })}
         </p>
         <div className="flex justify-center gap-4 pt-2">

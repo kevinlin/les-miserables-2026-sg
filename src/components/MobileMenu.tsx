@@ -20,6 +20,7 @@ export default function MobileMenu({ onClose }: Props) {
   }, [onClose])
 
   const links = [
+    { href: '#schedule', label: { en: 'Schedule', zh: '时间表' } },
     { href: '#highlights', label: { en: 'Highlights', zh: '亮点' } },
     { href: '#cast', label: { en: 'Cast', zh: '演员' } },
     { href: '#songs', label: { en: 'Songs', zh: '曲目' } },
