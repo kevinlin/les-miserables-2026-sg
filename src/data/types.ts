@@ -1,11 +1,12 @@
 export type Bilingual = { en: string; zh: string }
 
-export type CastTag = 'featured' | 'local' | 'celebrity'
+export type CastTag = 'featured' | 'local' | 'celebrity' | 'highlight'
 
 export type CastMember = {
   id: string
   name: string
   role: Bilingual
+  characterDescription: Bilingual
   bio: Bilingual
   whySpecial: Bilingual | null
   songs: string[]

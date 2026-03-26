@@ -10,6 +10,9 @@ export default function CastSection() {
   const [selectedCast, setSelectedCast] = useState<CastMember | null>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
 
+  const spotlightCast = standardCast.filter((m) => m.tags.includes('highlight'))
+  const regularCast = standardCast.filter((m) => !m.tags.includes('highlight'))
+
   const handleCardClick = (member: CastMember) => {
     triggerRef.current = document.activeElement as HTMLButtonElement
     setSelectedCast(member)
@@ -28,15 +31,35 @@ export default function CastSection() {
         </h2>
 
         {/* Featured row — 2 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 items-start">
           {featuredCast.map((member) => (
             <CastCard key={member.id} member={member} variant="featured" onClick={handleCardClick} />
           ))}
         </div>
 
+        {/* Spotlight row — highlight-tagged standard cast */}
+        {spotlightCast.length > 0 && (
+          <>
+            <p className="font-display text-xs tracking-[4px] uppercase text-accent/70 mb-6 text-center">
+              {t({ en: 'Spotlight', zh: '焦点演员' })}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 items-start">
+              {spotlightCast.map((member) => (
+                <CastCard
+                  key={member.id}
+                  member={member}
+                  variant="featured"
+                  highlighted
+                  onClick={handleCardClick}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
         {/* Standard grid — 1/2/3 columns responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
-          {standardCast.map((member) => (
+          {regularCast.map((member) => (
             <CastCard key={member.id} member={member} variant="standard" onClick={handleCardClick} />
           ))}
         </div>
