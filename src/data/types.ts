@@ -21,6 +21,7 @@ export type Song = {
   character: Bilingual
   act: 1 | 2 | 'prologue' | 'epilogue'
   description: Bilingual
+  context: Bilingual
 }
 
 export type Highlight = {
