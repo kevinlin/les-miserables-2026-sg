@@ -26,6 +26,9 @@ export default function Nav() {
           <a href="#songs" className="text-sm text-muted hover:text-foreground transition-colors">
             {t({ en: 'Songs', zh: '曲目' })}
           </a>
+          <a href="#videos" className="text-sm text-muted hover:text-foreground transition-colors">
+            {t({ en: 'Videos', zh: '录像' })}
+          </a>
           <div className="flex items-center gap-2">
             <LanguageToggle />
             <ThemeToggle />
