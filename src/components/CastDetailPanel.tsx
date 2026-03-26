@@ -122,6 +122,9 @@ export default function CastDetailPanel({ member, onClose }: Props) {
                 <div>
                   <h2 className="font-display text-2xl font-bold text-foreground">{member.name}</h2>
                   <p className="text-muted text-lg mt-1">{t(member.role)}</p>
+                  <p className="text-sm text-foreground/70 leading-relaxed mt-3 italic">
+                    {t(member.characterDescription)}
+                  </p>
                 </div>
 
                 {/* Tags + Awards */}
