@@ -52,6 +52,26 @@ export const songs: Song[] = [
     },
   },
   {
+    id: 'in-my-life',
+    title: { en: 'In My Life', zh: '在我生命中' },
+    character: { en: 'Cosette, Valjean, Marius & Éponine', zh: '珂赛特、冉阿让、马吕斯与爱潘妮' },
+    act: 1,
+    description: {
+      en: "A quartet revealing each character's private longings — Cosette yearns for her past, Valjean fears losing her, Marius is captivated, and Éponine aches in silence.",
+      zh: '四重唱揭示每个角色内心的渴望——珂赛特追忆过往，冉阿让害怕失去她，马吕斯为之倾倒，爱潘妮在沉默中心痛。',
+    },
+  },
+  {
+    id: 'a-heart-full-of-love',
+    title: { en: 'A Heart Full of Love', zh: '满心爱意' },
+    character: { en: 'Cosette & Marius', zh: '珂赛特与马吕斯' },
+    act: 1,
+    description: {
+      en: "Cosette and Marius's tender first declaration of love, while Éponine listens heartbroken from the shadows.",
+      zh: '珂赛特与马吕斯温柔的初次爱情告白，爱潘妮在暗处心碎地聆听。',
+    },
+  },
+  {
     id: 'one-day-more',
     title: { en: 'One Day More', zh: '再多一天' },
     character: { en: 'Full Company', zh: '全体演员' },
@@ -79,6 +99,16 @@ export const songs: Song[] = [
     description: {
       en: "Éponine's final duet with Marius as she dies in his arms at the barricade.",
       zh: '爱潘妮在街垒上于马吕斯怀中离世时的最后二重唱。',
+    },
+  },
+  {
+    id: 'javerts-suicide',
+    title: { en: "Javert's Suicide", zh: '沙威的自尽' },
+    character: { en: 'Javert', zh: '沙威' },
+    act: 2,
+    description: {
+      en: "Javert's world shatters when Valjean's mercy defies everything he believes — unable to reconcile justice with grace, he throws himself into the Seine.",
+      zh: '冉阿让的仁慈击碎了沙威的信仰——无法在律法与恩典之间自处，他纵身跃入塞纳河。',
     },
   },
   {
