@@ -17,6 +17,9 @@ export default function Nav() {
 
         {/* Desktop nav links + controls */}
         <div className="hidden lg:flex items-center gap-6">
+          <a href="#schedule" className="text-sm text-muted hover:text-foreground transition-colors">
+            {t({ en: 'Schedule', zh: '时间表' })}
+          </a>
           <a href="#highlights" className="text-sm text-muted hover:text-foreground transition-colors">
             {t({ en: 'Highlights', zh: '亮点' })}
           </a>
