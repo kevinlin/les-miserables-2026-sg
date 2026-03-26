@@ -24,6 +24,7 @@ export default function MobileMenu({ onClose }: Props) {
     { href: '#highlights', label: { en: 'Highlights', zh: '亮点' } },
     { href: '#cast', label: { en: 'Cast', zh: '演员' } },
     { href: '#songs', label: { en: 'Songs', zh: '曲目' } },
+    { href: '#videos', label: { en: 'Videos', zh: '录像' } },
   ]
 
   return (

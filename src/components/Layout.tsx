@@ -4,6 +4,7 @@ import ShowInfoSection from './ShowInfoSection'
 import HighlightsSection from './HighlightsSection'
 import CastSection from './CastSection'
 import SongsSection from './SongsSection'
+import VideosSection from './VideosSection'
 import Footer from './Footer'
 
 export default function Layout() {
@@ -16,6 +17,7 @@ export default function Layout() {
         <HighlightsSection />
         <CastSection />
         <SongsSection />
+        <VideosSection />
       </main>
       <Footer />
     </div>
