@@ -1,23 +1,27 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 import LanguageToggle from './LanguageToggle'
 import ThemeToggle from './ThemeToggle'
 
-type Props = { onClose: () => void }
+type Props = { onClose: () => void; toggleRef: React.RefObject<HTMLButtonElement | null> }
 
-export default function MobileMenu({ onClose }: Props) {
+export default function MobileMenu({ onClose, toggleRef }: Props) {
   const { t } = useLanguage()
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      const target = e.target as Node
+      if (
+        menuRef.current && !menuRef.current.contains(target) &&
+        toggleRef.current && !toggleRef.current.contains(target)
+      ) {
         onClose()
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [onClose])
+  }, [onClose, toggleRef])
 
   const links = [
     { href: '#schedule', label: { en: 'Schedule', zh: '时间表' } },

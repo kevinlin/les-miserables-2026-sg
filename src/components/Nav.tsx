@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 import LanguageToggle from './LanguageToggle'
 import ThemeToggle from './ThemeToggle'
@@ -6,6 +6,7 @@ import MobileMenu from './MobileMenu'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
   const { t } = useLanguage()
 
   return (
@@ -40,6 +41,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
+          ref={hamburgerRef}
           className="lg:hidden p-2 text-foreground"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -56,7 +58,7 @@ export default function Nav() {
       </div>
 
       {/* Mobile menu dropdown */}
-      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}
+      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} toggleRef={hamburgerRef} />}
     </nav>
   )
 }
